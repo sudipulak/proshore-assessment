@@ -1,38 +1,139 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+:root {
+  --primary: #0d1117;
+  --primaryLight: #161b22;
+  --text: #c9d1d9;
+  --title: #58a6ff;
+  --secondary: #238636;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-size: 16px;
+  background: var(--primary);
+  color: var(--text);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  padding: 0 5%;
+}
+
+.select-input,
+input {
+  height: 40px;
+  background: var(--primary);
+  border-width: 0;
+  padding: 0 10px;
+  color: var(--text);
+}
+
+.select-input:focus,
+input:focus {
+  outline: 0px;
+}
+
+.btn {
+  color: var(--text);
+  background: var(--secondary);
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-width: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #2ea043;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.header {
+  background: var(--primaryLight);
+  border-bottom: 1px solid #555;
+}
+
+.searchbar {
+  height: 70px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.searchbar span {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.searchbar svg {
+  fill: var(--text);
+  margin-right: 10px;
+}
+
+/* search list  */
+.search-list {
+  max-width: 700px;
+  margin: auto;
+}
+
+.search-list .search-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.search-list .search-info .select-input {
+  border: 1px solid var(--primaryLight);
+}
+
+.search-list .list {
+  list-style: none;
+}
+
+.search-list .list li {
+  display: flex;
+  padding: 30px 0;
+  border-top: 1px solid rgba(201, 209, 217, 0.4);
+}
+
+.search-list .list .list-style {
+  padding: 5px 15px 0 0;
+}
+
+.search-list .list .list-description a {
+  display: inline-block;
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: var(--title);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.search-list .list .list-description a:hover {
+  text-decoration: underline;
+}
+
+.search-list .list .repo-info span {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 300;
+  margin-right: 20px;
+}
+
+.search-list .list .repo-info span svg {
+  transform: translateY(2px);
 }

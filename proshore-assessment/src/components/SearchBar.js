@@ -1,26 +1,42 @@
 import React, { useState } from "react";
 import Results from "../components/Results";
 import axios from "axios"
+import Pagination from "./Pagination";
 
 const SearchBar = () => {
     const [searchValue, setSearchValue] = useState('')
     const [repos, setRepos] = useState([])
-    const getRepoData = async () => {
-        var requestOption = {
-            method: 'GET',
-            headers: {
-                Authorization: 'Bearer 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'
-            },
-            redirect: 'follow'
-        };
+    const [loading, setLoading] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [reposPerPage, setReposPerPage] = useState(10)
+
+    const getRepoData = async (data) => {
+        // With Bearer Token 
+        // var requestOption = {
+        //     method: 'GET',
+        //     headers: {
+        //         Authorization: 'Bearer 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'
+        //     },
+        //     redirect: 'follow'
+        // };
         try {
-            const response = await axios(`https://api.github.com/users/${searchValue}/repos`, requestOption)
-            setRepos(response.data)
+            setLoading(true)
+            // With Bearer Token 
+            // const response = await axios(`https://api.github.com/search/repositories?q="${searchValue}"&page=1&per_page=1000&sort=${data}`, requestOption)
+            const response = await axios(`https://api.github.com/search/repositories?q="${searchValue}"`)
+            setLoading(false)
+            response.data.length === 0 ? (
+                alert('No Data Found')
+            ) : setRepos(response.data.items)
         } catch (error) {
             console.log(error)
         }
     }
+    const indexOfLastRepo = currentPage * reposPerPage;
+    const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
+    const currentRepos = repos.slice(indexOfFirstRepo, indexOfLastRepo);
 
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
     return (
         <>
             <div className="header">
@@ -39,7 +55,8 @@ const SearchBar = () => {
                     </div>
                 </div>
             </div>
-            <Results repos={repos} />
+            <Results repos={currentRepos} loading={loading} totalRepos={repos.length} setReposPerPage={setReposPerPage} reposPerPage={reposPerPage} getRepoData={getRepoData} />
+            <Pagination reposPerPage={reposPerPage} totalRepos={repos.length} paginate={paginate} currentPage={currentPage} />
         </>
     )
 };

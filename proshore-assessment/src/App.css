@@ -32,8 +32,13 @@ input {
   border-width: 0;
   padding: 0 10px;
   color: var(--text);
+  border-radius: 4px;
 }
 
+input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
 .select-input:focus,
 input:focus {
   outline: 0px;
@@ -47,6 +52,8 @@ input:focus {
   border-width: 0;
   cursor: pointer;
   transition: all 0.3s;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .btn:hover {
@@ -88,16 +95,20 @@ input:focus {
   max-width: 700px;
   margin: auto;
 }
-
 .search-list .search-info {
+  padding: 30px 0;
+}
+
+.search-list .search-info .filters {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 0;
+  margin-top: 30px;
 }
 
 .search-list .search-info .select-input {
   border: 1px solid var(--primaryLight);
+  margin-left: 10px;
 }
 
 .search-list .list {
@@ -136,4 +147,41 @@ input:focus {
 
 .search-list .list .repo-info span svg {
   transform: translateY(2px);
+}
+
+/* Pagination  */
+.pagination-wrapper {
+  max-width: 700px;
+  margin: 20px auto 60px;
+  text-align: center;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination .page-link {
+  display: inline-block;
+  text-decoration: none;
+  height: 40px;
+  min-width: 40px;
+  line-height: 38px;
+  text-align: center;
+  padding: 5px;
+  margin: 0 5px;
+  background: var(--primaryLight);
+  color: var(--text);
+  border-radius: 4px;
+}
+
+.pagination .page-item.active .page-link {
+  background: var(--text);
+  color: var(--primaryLight);
+}
+
+.pagination .page-item.prev .page-link,
+.pagination .page-item.next .page-link {
+  padding: 5px 15px;
 }

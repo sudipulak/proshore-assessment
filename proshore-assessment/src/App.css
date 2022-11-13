@@ -64,9 +64,13 @@ input:focus {
   outline: none;
 }
 
+.loading {
+  margin: 30px auto;
+  text-align: center;
+}
+
 .header {
   background: var(--primaryLight);
-  border-bottom: 1px solid #555;
 }
 
 .searchbar {
@@ -74,6 +78,7 @@ input:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 7px;
 }
 
 .searchbar span {
@@ -184,4 +189,55 @@ input:focus {
 .pagination .page-item.prev .page-link,
 .pagination .page-item.next .page-link {
   padding: 5px 15px;
+}
+
+/* Search Detail  */
+.search-detail .result-box {
+  height: 80vh;
+  padding: 30px;
+  border: 1px solid var(--primaryLight);
+  max-width: 700px;
+  margin: 30px auto;
+}
+
+.search-detail .result-box .title {
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--primaryLight);
+  margin-bottom: 20px;
+}
+
+.search-detail .result-box .title h2 {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.search-detail .result-box .title .icon {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.search-detail .result-box .title a {
+  color: var(--title);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.search-detail .result-box .title a:hover {
+  text-decoration: underline;
+}
+
+.search-detail .result-box .title {
+  flex-direction: column;
+}
+
+.search-detail .result-box .title,
+.search-detail .result-box .result-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-detail .result-box .result-info {
+  margin-bottom: 20px;
 }

@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { searchContext } from "../App";
 
-const Pagination = ({ reposPerPage, totalRepos, paginate, currentPage }) => {
+const Pagination = () => {
+  const { reposPerPage, totalRepos, paginate, currentPage } =
+    useContext(searchContext);
+
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalRepos / reposPerPage); i++) {
@@ -37,7 +41,7 @@ const Pagination = ({ reposPerPage, totalRepos, paginate, currentPage }) => {
                   e.preventDefault();
                   paginate(number);
                 }}
-                href="!#"
+                href=" #"
                 className="page-link"
               >
                 {number}

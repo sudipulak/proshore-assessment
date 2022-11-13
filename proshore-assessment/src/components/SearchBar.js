@@ -1,64 +1,54 @@
-import React, { useState } from "react";
-import Results from "../components/Results";
-import axios from "axios"
-import Pagination from "./Pagination";
+import React, { useContext } from "react";
+import { searchContext } from "../App";
+import Results from "./Results";
 
 const SearchBar = () => {
-    const [searchValue, setSearchValue] = useState('')
-    const [repos, setRepos] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [currentPage, setCurrentPage] = useState(1)
-    const [reposPerPage, setReposPerPage] = useState(10)
-
-    const getRepoData = async (data) => {
-        // With Bearer Token 
-        // var requestOption = {
-        //     method: 'GET',
-        //     headers: {
-        //         Authorization: 'Bearer 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'
-        //     },
-        //     redirect: 'follow'
-        // };
-        try {
-            setLoading(true)
-            // With Bearer Token 
-            // const response = await axios(`https://api.github.com/search/repositories?q="${searchValue}"&page=1&per_page=1000&sort=${data}`, requestOption)
-            const response = await axios(`https://api.github.com/search/repositories?q="${searchValue}"`)
-            setLoading(false)
-            response.data.length === 0 ? (
-                alert('No Data Found')
-            ) : setRepos(response.data.items)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    const indexOfLastRepo = currentPage * reposPerPage;
-    const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
-    const currentRepos = repos.slice(indexOfFirstRepo, indexOfLastRepo);
-
-    const paginate = (pageNumber) => setCurrentPage(pageNumber)
-    return (
-        <>
-            <div className="header">
-                <div className="container">
-                    <div className="searchbar">
-                        <span>
-                            <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" className="octicon octicon-mark-github v-align-middle">
-                                <path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                            </svg>
-                            Demo
-                        </span>
-                        <div className="search">
-                            <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="search here" />
-                            <button className="btn" onClick={getRepoData}>Search</button>
-                        </div>
-                    </div>
-                </div>
+  const { searchValue, setSearchValue, getRepoData } =
+    useContext(searchContext);
+  const searchHandle = (e) => {
+    setSearchValue(e.target.value);
+  };
+  return (
+    <>
+      <div className="header">
+        <div className="container">
+          <div className="searchbar">
+            <span>
+              <svg
+                height="32"
+                aria-hidden="true"
+                viewBox="0 0 16 16"
+                version="1.1"
+                width="32"
+                data-view-component="true"
+                className="octicon octicon-mark-github v-align-middle"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                ></path>
+              </svg>
+              Demo
+            </span>
+            <div className="search">
+              <input
+                type="text"
+                value={searchValue}
+                onChange={(e) => {
+                  searchHandle(e);
+                }}
+                placeholder="search here"
+              />
+              <button className="btn" onClick={getRepoData}>
+                Search{" "}
+              </button>
             </div>
-            <Results repos={currentRepos} loading={loading} totalRepos={repos.length} setReposPerPage={setReposPerPage} reposPerPage={reposPerPage} getRepoData={getRepoData} />
-            <Pagination reposPerPage={reposPerPage} totalRepos={repos.length} paginate={paginate} currentPage={currentPage} />
-        </>
-    )
+          </div>
+        </div>
+      </div>
+      <Results />
+    </>
+  );
 };
 
 export default SearchBar;

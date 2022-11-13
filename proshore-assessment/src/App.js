@@ -18,20 +18,23 @@ function App() {
 
   const getRepoData = async (data) => {
     // With Bearer Token
-    var requestOption = {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer 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'
-      },
-      redirect: 'follow'
-    };
+    // var requestOption = {
+    //   method: 'GET',
+    //   headers: {
+    //     Authorization: 'Bearer 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'
+    //   },
+    //   redirect: 'follow'
+    // };
+
     setLoading(true);
     try {
       // With Bearer Token
-      const response = await axios(`https://api.github.com/search/repositories?q="${searchValue}"&page=1&per_page=1000&sort=${data}`, requestOption)
-      // const response = await axios(
-      //   `https://api.github.com/search/repositories?q="${searchValue}"&page=1&per_page=1000&sort=${data}`
-      // );
+      // const response = await axios(`https://api.github.com/search/repositories?q="${searchValue}"&page=1&per_page=1000&sort=${data}`, requestOption)
+
+      // Without Bearer Token 
+      const response = await axios(
+        `https://api.github.com/search/repositories?q="${searchValue}"&page=1&per_page=1000&sort=${data}`
+      );
       setLoading(false);
       response.data.total_count === 0
         ? alert("No Data Found")

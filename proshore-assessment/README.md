@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## `npm install` installing packages
+
+If you have cloned the project from github you can install all the packages that is required in order to run the project from package.json with the above command.
+
+## `src/App.js` api bearer token
+
+You can uncomment the code below With Bearer Token(line 31 and 20) and comment the code below Without Bearer Token(line 35) till ;(line 37) if the free api unauthorize access limit expires.

@@ -45,7 +45,7 @@ const Results = () => {
           </div>
           <div className="list-description">
             <Link to={"search-detail/" + item.id}>{item.name}</Link>
-            <p>{item.description}</p>
+            <p>{item.description.slice(0, 250)}</p>
             <div className="repo-info">
               <span>
                 <AiOutlineStar /> {item.stargazers_count}{" "}
